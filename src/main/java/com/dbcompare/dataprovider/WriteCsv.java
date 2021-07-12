@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import cucumber.api.java.hr.I;
+
 public class WriteCsv {
 
 	public static Iterator<Object[]> getCsvData(String fileName) {
@@ -72,18 +74,21 @@ public class WriteCsv {
             List<List<String>> records = Arrays.asList(Arrays.asList("1", resultString)
 
             );
-            //Increment csv name - temp setup
-            int i = 1;
-            while (i <= 5) {
-                System.out.println(i);
-                i++; // add 1 to i
-            }
+            //Attempt to create unique filename. Produce random number
+			int min = 1;
+			int max = 10;
+			int ranStr = 0; 
+			for(int i = min; i <=max; i++) {
+			ranStr = (int) (Math.random()*(max-min)) + min;
+			System.out.println(ranStr);
+			}
+	
 
             // create a writer
-            BufferedWriter writer = Files.newBufferedWriter(Paths.get("users-with-header" + i + ".csv"));
+            BufferedWriter writer = Files.newBufferedWriter(Paths.get("users-with-header" + ranStr + ".csv"));
 
             // write header record
-            writer.write("ID,Name,Country");
+            writer.write("MySQl count number");
             writer.newLine();
 
             // write all records

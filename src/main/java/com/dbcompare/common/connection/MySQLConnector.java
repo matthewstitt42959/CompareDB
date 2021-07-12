@@ -5,24 +5,21 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
-import java.util.Arrays;
-import java.util.List;
+
 import java.sql.PreparedStatement;
 
 import com.dbcompare.dataprovider.ReadCsv;
 import com.dbcompare.dataprovider.WriteCsv;
-import com.mysql.cj.mysqla.result.ResultsetRowsStreaming;
 
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.seleniumhq.jetty9.server.Connector;
+
+
 
 public class MySQLConnector {
 
@@ -40,7 +37,6 @@ public class MySQLConnector {
     // Following is Printing details
 
     static String fileName = "";
-    private static String row;
     private static String count;
 
 
