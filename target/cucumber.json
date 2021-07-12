@@ -1,0 +1,51 @@
+[
+  {
+    "line": 4,
+    "elements": [
+      {
+        "start_timestamp": "2021-07-08T20:13:48.635Z",
+        "line": 13,
+        "name": "Connect to two databases and compare results",
+        "description": "",
+        "id": "attempt-to-compare-mysql-databases;connect-to-two-databases-and-compare-results;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 7,
+            "name": "Connection to Database orgchart_api, orgchart_api_copy, mstitt, root",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 8,
+            "name": "\u003ctable\u003e is compared to \u003ctable\u003e",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 9,
+            "name": "Results should match",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Attempt to compare MySQL databases",
+    "description": "",
+    "id": "attempt-to-compare-mysql-databases",
+    "keyword": "Feature",
+    "uri": "file:features/compareMySql.feature",
+    "tags": []
+  }
+]

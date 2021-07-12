@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<TestData>
+	<TestSet testrun= "Y">
+		<id>aabgod</id>
+		<title>Resolving Conflict Training</title>
+		<name>Yasmin Rodriguez</name>
+		<Start_Date>2021-07-27T20:00:00Z</Start_Date>
+		<End_Date>2021-07-27T21:00:00Z</End_Date>
+	</TestSet>
+	<TestSet testrun= "N">
+		<userName>Username2</userName>
+		<password>Password2</password>
+		<location>Florida</location>
+		<address>Tampa</address>
+	</TestSet>
+	<TestSet testrun= "Y">
+		<userName>Username3</userName>
+		<password>Password3</password>
+		<location>California</location>
+		<address>Newark</address>
+	</TestSet>
+</TestData>
