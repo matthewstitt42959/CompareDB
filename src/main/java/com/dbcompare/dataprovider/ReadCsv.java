@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 
 public class ReadCsv {
 
+	private static String row;
+
 	public static Iterator<Object[]> getCsvData(String fileName) {
 
 		List<Object[]> csvData = new ArrayList<Object[]>();
@@ -58,5 +60,17 @@ public class ReadCsv {
 		}
 		return csvData.iterator();
 	}
+
+	public static void ReadfromCSV(String fileName) throws IOException {
+        String pathToCsv = "src//test//java//com//dbcompare//TestDataFiles//users-with-header.csv";
+        BufferedReader csvReader = new BufferedReader(new FileReader(pathToCsv));
+        while ((row = csvReader.readLine()) != null) {
+            String[] data = row.split(",");
+            String hi = data.toString(); 
+            System.out.println(hi);
+        }
+        csvReader.close();
+        // create BufferedReader and read data from csv
+    }
 
 }

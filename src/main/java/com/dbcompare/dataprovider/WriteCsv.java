@@ -9,7 +9,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -62,25 +65,40 @@ public class WriteCsv {
 		return csvData.iterator();
 	}
 
-	private List<String>[] rows;
+ 	public static String WriteToCSV(String resultString, String fileName, String count) throws IOException {
+        
+        try {
+            // create a list of objects
+            List<List<String>> records = Arrays.asList(Arrays.asList("1", resultString)
 
-	public void writeToCSV() throws IOException{
-		FileWriter csvWriter = new FileWriter("new.csv");
-	csvWriter.append("Name");
-	csvWriter.append(",");
-	csvWriter.append("Role");
-	csvWriter.append(",");
-	csvWriter.append("Topic");
-	csvWriter.append("\n");
+            );
+            //Increment csv name - temp setup
+            int i = 1;
+            while (i <= 5) {
+                System.out.println(i);
+                i++; // add 1 to i
+            }
 
-for (List<String> rowData : rows) {
-    csvWriter.append(String.join(",", rowData));
-    csvWriter.append("\n");
-}
+            // create a writer
+            BufferedWriter writer = Files.newBufferedWriter(Paths.get("users-with-header" + i + ".csv"));
 
-	csvWriter.flush();
-	csvWriter.close();
-	}
-	
+            // write header record
+            writer.write("ID,Name,Country");
+            writer.newLine();
+
+            // write all records
+            for (List<String> record : records) {
+                writer.write(String.join(",", record));
+                writer.newLine();
+            }
+
+            // close the writer
+            writer.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return fileName;
+    }
 
 }

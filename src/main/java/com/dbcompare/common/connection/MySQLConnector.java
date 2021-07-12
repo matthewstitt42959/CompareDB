@@ -18,6 +18,7 @@ import java.util.List;
 import java.sql.PreparedStatement;
 
 import com.dbcompare.dataprovider.ReadCsv;
+import com.dbcompare.dataprovider.WriteCsv;
 import com.mysql.cj.mysqla.result.ResultsetRowsStreaming;
 
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -44,9 +45,9 @@ public class MySQLConnector {
 
 
     public static void main(String[] args) throws IOException {
-        Connector(host, dbName, userName, password, tableName);
+        DBConnector.Connector(host, dbName, userName, password, tableName);
         dbName = dbName2;  
-        Connector(host, dbName2, userName, password, tableName);
+        DBConnector.Connector(host, dbName2, userName, password, tableName);
         resultString = count; 
         Compare_Results(resultString);
     }
@@ -56,22 +57,12 @@ public class MySQLConnector {
         // Get first result
         // Save to csv?
         
-        WriteToCSV(resultString, fileName, count);
-        ReadfromCSV(fileName);
+        WriteCsv.WriteToCSV(resultString, fileName, count);
+        ReadCsv.ReadfromCSV(fileName);
 
     }
 
-    private static void ReadfromCSV(String fileName) throws IOException {
-        String pathToCsv = "src//test//java//com//dbcompare//TestDataFiles//users-with-header.csv";
-        BufferedReader csvReader = new BufferedReader(new FileReader(pathToCsv));
-        while ((row = csvReader.readLine()) != null) {
-            String[] data = row.split(",");
-            String hi = data.toString(); 
-            System.out.println(hi);
-        }
-        csvReader.close();
-        // create BufferedReader and read data from csv
-    }
+  
 
     public static String getCount() {
         return count;
@@ -79,77 +70,6 @@ public class MySQLConnector {
 
     public static void setCount(String count) {
         MySQLConnector.count = count;
-    }
-
-    private static String WriteToCSV(String resultString, String fileName, String count) throws IOException {
-        
-        try {
-            // create a list of objects
-            List<List<String>> records = Arrays.asList(Arrays.asList("1", resultString)
-
-            );
-            //Increment csv name - temp setup
-            int i = 1;
-            while (i <= 5) {
-                System.out.println(i);
-                i++; // add 1 to i
-            }
-
-            // create a writer
-            BufferedWriter writer = Files.newBufferedWriter(Paths.get("users-with-header" + i + ".csv"));
-
-            // write header record
-            writer.write("ID,Name,Country");
-            writer.newLine();
-
-            // write all records
-            for (List<String> record : records) {
-                writer.write(String.join(",", record));
-                writer.newLine();
-            }
-
-            // close the writer
-            writer.close();
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return fileName;
-    }
-
-    public static Connection Connector(String host, String dbName, String userName, String password, String tableName) {
-
-        try (Connection conn = DriverManager.getConnection(host, userName, password)) {
-            System.out.println(dbName + "" + " connected!");
-           
-            CountResultset(conn, dbName, tableName, count);
-            CloseConnection(conn);
-
-        } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
-
-        } finally {
-
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException sqlEx) {
-                } // ignore
-                rs = null;
-            }
-        }
-        return conn;
-
-    }
-
-    private static void CloseConnection(Connection conn) throws SQLException {
-        conn.close();
-
-        try {
-            conn.getMetaData();
-        } catch (Exception e) {
-            System.out.println("Connection is closed");
-        }
     }
 
     public static void CountResultset(Connection conn, String dbName, String tableName, String count) {
